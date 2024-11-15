@@ -55,13 +55,14 @@ class Singleton(object):
         return self.df.shape[0]
 
     def start(self, pct):
-        index = int(pct*len(self))
-        it = 0
+        #index = int(pct*len(self))
+        index = int(len(self)-pct-1)
+        it = 1
         self.accuracyArray = []
         lastLen = 0
         with st.spinner('Aguarde...'):
             start_time = time.time()
-            while index < len(self):
+            while index < len(self)-1:
                 avgLine = self.df['Adj_Close'][:index]
                 dates = self.df['Date'][:index]
 
@@ -81,6 +82,7 @@ class Singleton(object):
                     if lastLen < tam:
                         st.text(f'Acurácia é de {int(accuracyAverage)}% depois de {tam} predições.')
                         lastLen = tam
+            st.text(f'Fim do processamento, última data processada = {max(dates)}')
 
     def plot(self, data, index, dates, performanceAr, plotPatAr, patternAr, patForRec):
         predArray = []
@@ -179,7 +181,7 @@ class Singleton(object):
             performanceAr.append(futureOutcome)
 
             y += 1
-
+        
         return patternAr, performanceAr
 
     def current_pattern(self, avgLine, dates):
@@ -224,7 +226,8 @@ def main():
     st.text(f'O tamanho do dataframe é {len(c)}')
 
     st.header("Efetuar reconhecimento de padrões")
-    pct = st.slider('Qual a porcentagem dos dados? ', 0.0, 1.0, 0.6, 0.1)
+    #pct = st.slider('Qual a porcentagem dos dados? ', 0.0, 1.0, 0.6, 0.1)
+    pct = st.slider('Qual a quantidade de dias analisados? ', 0, 100, 30, 1)
 
     if st.button('Iniciar'):
         c.start(pct)

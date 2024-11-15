@@ -29,9 +29,4 @@ docker run -d --name pattern_recognition_09 -p 8509:8501 matheusmullergit/patter
 docker run -d --name pattern_recognition_10 -p 8510:8501 matheusmullergit/pattern_recognition
  ```  
 
-Instalar todas as dependências do python usando o arquivo requirements.txt que está no projeto:  
-
-```bash 
-pip install -r requirements.txt
- ```  
 Após a execução destes passos, as máquinas virtuais podem ser acessadas pelo navegador na máquina local através dos endereços sequenciais localhost:8501 à localhost:8510.
